@@ -91,4 +91,66 @@ class AdminAppTuhController extends Controller
             return view('login.login_admin_app_tuh');
         }
     }
+
+    public function tampil_data_profil_admin_app_tuh_oleh_admin_app_tuh(){
+        if (session()->has('LoggedAdminAppTuh')){
+            $data_admin_untuk_dashboard = AdminAppTuh::where('id','=',session('LoggedAdminAppTuh'))->first();
+            $data = [
+                'LoggedUserInfo'=>$data_admin_untuk_dashboard,
+            ];
+            return view('tampil_data_oleh_admin_app_tuh.tampil_data_profil_admin_app_tuh_oleh_admin_app_tuh',$data);
+        }else{
+            return view('login.login_admin_app');
+        }
+    }
+
+    public function simpan_perubahan_data_profil_admin_app_tuh(Request $request){
+        if (session()->has('LoggedAdminAppTuh')){
+            $request->validate([
+                'nama_admin_app'=>'required',
+            ],[
+                'nama_admin_app.required'=>'Data tidak boleh kosong',
+            ]);
+            $admin_data = AdminAppTuh::find($request->id);
+            $admin_data->nama_admin_app = $request->nama_admin_app;
+            $admin_data->save();
+            return redirect('dashboard_admin_app_tuh');
+        }else{
+            return view('login.login_admin_app_tuh');
+        }
+    }
+
+    public function simpan_perubahan_data_password_admin_app_tuh(Request $request){
+        if (session()->has('LoggedAdminAppTuh')){
+            $request->validate([
+                'password_baru'=>'required',
+            ],[
+                'password_baru.required'=>'Password tidak boleh kosong',
+            ]);
+            $admin_data = AdminAppTuh::find($request->id);
+            $admin_data->password_admin_app = Hash::make($request->password_baru);
+            $admin_data->save();
+            return redirect('dashboard_admin_app_tuh');
+        }else{
+            return view('login.login_admin_app_tuh');
+        }
+    }
+
+    public function simpan_perubahan_data_foto_admin_app_tuh(Request $request){
+        if (session()->has('LoggedAdminAppTuh')){
+            $admin_data = AdminAppTuh::find($request->id);
+            $request->validate([
+                'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            ]);
+            $extension = $request->file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $request->file->move(public_path('foto_admin_app'),$filename);
+            $data = $filename;
+            $admin_data->foto_admin_app = $data;
+            $admin_data->save();
+            return redirect('dashboard_admin_app_tuh');
+        }else{
+            return view('login.login_admin_app_tuh');
+        }
+    }
 }

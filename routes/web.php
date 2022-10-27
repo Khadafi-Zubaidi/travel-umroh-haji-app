@@ -25,3 +25,7 @@ Route::get('login_admin_app_tuh',[AdminAppTuhController::class,'login_admin_app_
 Route::post('cek_login_admin_app_tuh',[AdminAppTuhController::class,'cek_login_admin_app_tuh'])->name('cek_login_admin_app_tuh');
 Route::get('dashboard_admin_app_tuh',[AdminAppTuhController::class,'dashboard_admin_app_tuh'])->name('dashboard_admin_app_tuh');
 Route::get('logout_admin_app_tuh',[AdminAppTuhController::class,'logout_admin_app_tuh'])->name('logout_admin_app_tuh');
+Route::get('tampil_data_profil_admin_app_tuh_oleh_admin_app_tuh',[AdminAppTuhController::class,'tampil_data_profil_admin_app_tuh_oleh_admin_app_tuh'])->name('tampil_data_profil_admin_app_tuh_oleh_admin_app_tuh');
+Route::post('simpan_perubahan_data_profil_admin_app_tuh',[AdminAppTuhController::class,'simpan_perubahan_data_profil_admin_app_tuh'])->name('simpan_perubahan_data_profil_admin_app_tuh');
+Route::post('simpan_perubahan_data_password_admin_app_tuh',[AdminAppTuhController::class,'simpan_perubahan_data_password_admin_app_tuh'])->name('simpan_perubahan_data_password_admin_app_tuh');
+Route::post('simpan_perubahan_data_foto_admin_app_tuh',[AdminAppTuhController::class,'simpan_perubahan_data_foto_admin_app_tuh'])->name('simpan_perubahan_data_foto_admin_app_tuh');
