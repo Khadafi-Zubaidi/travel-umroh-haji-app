@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAppTuhController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Admin App Tuh
+Route::get('register_admin_app_tuh',[AdminAppTuhController::class,'register_admin_app_tuh'])->name('register_admin_app_tuh');
+Route::post('simpan_data_admin_app_tuh_baru',[AdminAppTuhController::class,'simpan_data_admin_app_tuh_baru'])->name('simpan_data_admin_app_tuh_baru');
