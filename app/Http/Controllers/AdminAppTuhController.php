@@ -39,4 +39,56 @@ class AdminAppTuhController extends Controller
         }
         
     }
+
+    public function login_admin_app_tuh(){
+        return view('login.login_admin_app_tuh');
+    }
+
+    public function cek_login_admin_app_tuh(Request $request){
+        $request->validate([
+            'nik_admin_app'=>'required',
+            'password_admin_app'=>'required',
+        ],[
+            'nik_admin_app.required'=>'Data tidak boleh kosong',
+            'password_admin_app.required'=>'Data tidak boleh kosong',
+        ]);
+        $cek_login = AdminAppTuh::where('nik_admin_app','=',$request->nik_admin_app)->first();
+        if($cek_login){
+            if(Hash::check($request->password_admin_app,$cek_login->password_admin_app)){
+                $request->session()->put('LoggedAdminAppTuh',$cek_login->id);
+                return redirect('dashboard_admin_app_tuh');
+            }else{
+                $notification = array(
+                    'error' => 'Password salah!',
+                );
+                return Redirect::to('login_admin_app_tuh')->with($notification);
+            }
+        }else{
+            $notification = array(
+                'error' => 'NIK tidak ditemukan!',
+            );
+            return Redirect::to('login_admin_app_tuh')->with($notification);
+        }
+    }
+
+    public function dashboard_admin_app_tuh(){
+        if (session()->has('LoggedAdminAppTuh')){
+            $data_admin_untuk_dashboard = AdminAppTuh::where('id','=',session('LoggedAdminAppTuh'))->first();
+            $data = [
+                'LoggedUserInfo'=>$data_admin_untuk_dashboard,
+            ];
+            return view('dashboard.dashboard_admin_app_tuh',$data);
+        }else{
+            return view('login.login_admin_app_tuh');
+        }
+    }
+
+    public function logout_admin_app_tuh(){
+        if (session()->has('LoggedAdminAppTuh')){
+            session()->pull('LoggedAdminAppTuh');
+            return redirect('login_admin_app_tuh');
+        }else{
+            return view('login.login_admin_app_tuh');
+        }
+    }
 }
