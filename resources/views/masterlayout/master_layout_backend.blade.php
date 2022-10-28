@@ -39,6 +39,17 @@
     <script src="{{asset('bootbox')}}/bootbox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <script>
+        $(function () {
+          $('#summernote1').summernote({
+                height: 250,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['para', ['ul', 'ol']],
+                ]
+            });
+        });
+    </script>
+    <script>
     $(function () {
         $('#data_tabel').DataTable({
             "paging": true,

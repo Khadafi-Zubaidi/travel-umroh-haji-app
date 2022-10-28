@@ -19,7 +19,7 @@
                 <div class="sidebar">
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="{{asset('foto_admin_app')}}/{{$LoggedUserInfo->foto_admin_app}}" class="img-circle elevation-2" alt="Foto Admin">
+                            <img src="{{asset('foto_admin_app')}}/{{$LoggedUserInfo->foto_admin_app}}" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block">{{$LoggedUserInfo->nama_admin_app}}</a>
@@ -28,33 +28,10 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-database"></i>
+                                <a href="{{route('tampil_data_produk_tuh_oleh_admin_app_tuh')}}" class="nav-link">
+                                    <i class="nav-icon fas fa-arrow-left"></i>
                                     <p>
-                                        Master Data
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{route('tampil_data_profil_admin_app_tuh_oleh_admin_app_tuh')}}" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Profil</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('tampil_data_produk_tuh_oleh_admin_app_tuh')}}" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Produk</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('logout_admin_app_tuh')}}" class="nav-link">
-                                    <i class="nav-icon fas fa-sign-out-alt"></i>
-                                    <p>
-                                        Keluar Aplikasi
+                                        Sebelumnya
                                     </p>
                                 </a>
                             </li>
@@ -78,7 +55,7 @@
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h5 class="card-title">Tentang Aplikasi</h5>
+                                        <h5 class="card-title">Pemasukan Data</h5>
                                         <div class="card-tools">
                                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                 <i class="fas fa-minus"></i>
@@ -88,11 +65,32 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="card card-primary card-outline">
-                                                    <div class="card-body">
-                                                        <p class="text-muted">{{ config('myconfig.tentang_aplikasi') }}</p>
+                                                <form action="{{route('simpan_data_produk_tuh_baru_oleh_admin_app_tuh')}}" method="post" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <label>Nama Produk *</label><br>
+                                                    <div class="input-group mb-3">
+                                                        <input type="text" name="nama_produk" class="form-control @error('nama_produk') is-invalid @enderror" value="{{ old('nama_produk')}}" required>
+                                                        @error('nama_produk')
+                                                            <div class="invalid-feedback">{{$message}}</div>
+                                                        @enderror
                                                     </div>
-                                                </div>
+                                                    <label>Harga Produk *</label><br>
+                                                    <div class="input-group mb-3">
+                                                        <input type="number" name="harga_produk" class="form-control @error('harga_produk') is-invalid @enderror" value="{{ old('harga_produk')}}" required>
+                                                        @error('harga_produk')
+                                                            <div class="invalid-feedback">{{$message}}</div>
+                                                        @enderror
+                                                    </div>
+                                                    <label>Deskripsi Produk *</label><br>
+                                                    <div class="input-group mb-3">
+                                                        <div class="col-md-12">
+                                                            <textarea name="deskripsi_produk"id="summernote1"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <button type="submit" class="btn btn-success btn-block">Simpan</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

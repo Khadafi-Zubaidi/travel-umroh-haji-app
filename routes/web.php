@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAppTuhController;
+use App\Http\Controllers\ProdukTuhController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,21 @@ Route::get('tampil_data_profil_admin_app_tuh_oleh_admin_app_tuh',[AdminAppTuhCon
 Route::post('simpan_perubahan_data_profil_admin_app_tuh',[AdminAppTuhController::class,'simpan_perubahan_data_profil_admin_app_tuh'])->name('simpan_perubahan_data_profil_admin_app_tuh');
 Route::post('simpan_perubahan_data_password_admin_app_tuh',[AdminAppTuhController::class,'simpan_perubahan_data_password_admin_app_tuh'])->name('simpan_perubahan_data_password_admin_app_tuh');
 Route::post('simpan_perubahan_data_foto_admin_app_tuh',[AdminAppTuhController::class,'simpan_perubahan_data_foto_admin_app_tuh'])->name('simpan_perubahan_data_foto_admin_app_tuh');
+
+//Produk Tuh
+Route::get('tampil_data_produk_tuh_oleh_admin_app_tuh',[ProdukTuhController::class,'tampil_data_produk_tuh_oleh_admin_app_tuh'])->name('tampil_data_produk_tuh_oleh_admin_app_tuh');
+Route::get('/cari_id_produk_tuh/{id}',[ProdukTuhController::class,'cari_id_produk_tuh']);
+Route::put('/simpan_perubahan_data_pokok_produk_tuh_oleh_admin_app_tuh',[ProdukTuhController::class,'simpan_perubahan_data_pokok_produk_tuh_oleh_admin_app_tuh'])->name('produk_tuh.simpan_perubahan_data_pokok');
+Route::put('/hapus_data_produk_tuh_oleh_admin_app_tuh',[ProdukTuhController::class,'hapus_data_produk_tuh_oleh_admin_app_tuh'])->name('produk_tuh.hapus_data');
+Route::post('/simpan_perubahan_data_foto_produk_tuh_oleh_admin_app_tuh',[ProdukTuhController::class,'simpan_perubahan_data_foto_produk_tuh_oleh_admin_app_tuh'])->name('produk_tuh.simpan_perubahan_foto');
+Route::get('tambah_data_produk_tuh_oleh_admin_app_tuh',[ProdukTuhController::class,'tambah_data_produk_tuh_oleh_admin_app_tuh'])->name('tambah_data_produk_tuh_oleh_admin_app_tuh');
+Route::post('simpan_data_produk_tuh_baru_oleh_admin_app_tuh',[ProdukTuhController::class,'simpan_data_produk_tuh_baru_oleh_admin_app_tuh'])->name('simpan_data_produk_tuh_baru_oleh_admin_app_tuh');
+
+
+
+
+
+
+
+
+
